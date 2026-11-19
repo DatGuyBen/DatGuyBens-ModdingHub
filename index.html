@@ -1,0 +1,510 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>DAT GUYS MODS</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --blue: #168cff;
+    --bright: #63b5ff;
+    --dark: #050811;
+    --panel: #0b1423;
+}
+
+body {
+    background: var(--dark);
+    color: white;
+    font-family: 'Press Start 2P', monospace;
+    overflow-x: hidden;
+    image-rendering: pixelated;
+}
+
+/* PIXEL BACKGROUND */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background:
+        linear-gradient(#168cff12 2px, transparent 2px),
+        linear-gradient(90deg, #168cff12 2px, transparent 2px);
+    background-size: 32px 32px;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    pointer-events: none;
+    opacity: .15;
+    background: repeating-linear-gradient(
+        transparent 0px,
+        transparent 3px,
+        black 4px
+    );
+}
+
+/* PIXEL PARTICLES */
+
+.pixels {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.pixel {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: var(--blue);
+    opacity: .45;
+    animation: float 5s infinite alternate;
+}
+
+@keyframes float {
+    from { transform: translateY(0); opacity: .15; }
+    to { transform: translateY(-35px); opacity: .8; }
+}
+
+/* ENTER SCREEN */
+
+#enter-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: radial-gradient(circle, #102d50, #080e19 65%, #050811);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+}
+
+.small-text {
+    color: var(--bright);
+    font-size: 9px;
+    line-height: 2.5;
+    margin-bottom: 35px;
+    animation: blink 1s steps(2) infinite;
+}
+
+#enter-screen h1 {
+    font-size: clamp(24px, 6vw, 48px);
+    line-height: 1.9;
+    text-shadow: 5px 5px #064b91;
+}
+
+#enter-screen h1 span {
+    color: var(--blue);
+}
+
+.pixel-line {
+    width: 180px;
+    height: 8px;
+    background: var(--blue);
+    margin: 35px;
+    box-shadow: 0 0 20px var(--blue);
+}
+
+.enter-button {
+    font-family: inherit;
+    background: var(--blue);
+    color: white;
+    border: 4px solid var(--bright);
+    padding: 22px 25px;
+    font-size: 10px;
+    cursor: pointer;
+    box-shadow: 7px 7px #064b91;
+    transition: .15s;
+}
+
+.enter-button:hover {
+    background: #55aaff;
+    transform: translateY(-4px);
+}
+
+.bottom-text {
+    position: absolute;
+    bottom: 35px;
+    font-size: 8px;
+    color: #607c9c;
+    line-height: 2;
+}
+
+/* WEBSITE */
+
+#website {
+    display: none;
+}
+
+nav {
+    min-height: 85px;
+    padding: 15px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    background: #080e19;
+    border-bottom: 3px solid #142b46;
+}
+
+.brand {
+    color: var(--blue);
+    font-size: 11px;
+    line-height: 2;
+    text-shadow: 3px 3px #064b91;
+}
+
+nav a {
+    color: #a7bad0;
+    text-decoration: none;
+    font-size: 8px;
+    margin-left: 18px;
+    line-height: 2.5;
+}
+
+nav a:hover {
+    color: var(--bright);
+    text-shadow: 0 0 12px var(--blue);
+}
+
+/* HERO */
+
+.hero {
+    min-height: 460px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 65px 20px;
+    background: radial-gradient(ellipse, #102d50, #080e19 70%);
+    border-bottom: 2px solid #142b46;
+}
+
+.status {
+    color: #4de99b;
+    font-size: 9px;
+    margin-bottom: 30px;
+    line-height: 2;
+}
+
+.hero h1 {
+    font-size: clamp(25px, 6vw, 49px);
+    line-height: 1.9;
+    text-shadow: 5px 5px #064b91;
+}
+
+.hero h1 span {
+    color: var(--blue);
+}
+
+.hero p {
+    max-width: 650px;
+    color: #9aafc9;
+    font-size: 9px;
+    line-height: 3;
+    margin-top: 22px;
+}
+
+.button {
+    display: inline-block;
+    margin-top: 35px;
+    padding: 20px 25px;
+    background: var(--blue);
+    color: white;
+    text-decoration: none;
+    font-size: 9px;
+    border: 3px solid var(--bright);
+    box-shadow: 6px 6px #064b91;
+    transition: .2s;
+}
+
+.button:hover {
+    background: #55aaff;
+    transform: translateY(-4px);
+}
+
+/* MAIN CONTENT */
+
+.container {
+    max-width: 1050px;
+    margin: auto;
+    padding: 65px 25px;
+}
+
+.heading {
+    color: var(--bright);
+    font-size: 15px;
+    line-height: 2;
+    margin-bottom: 22px;
+}
+
+.description {
+    color: #8295af;
+    font-size: 9px;
+    line-height: 2.8;
+}
+
+/* PIXEL BOX */
+
+.pixel-panel {
+    margin-top: 35px;
+    padding: 55px 20px;
+    text-align: center;
+    background: var(--panel);
+    border: 4px solid #1b3859;
+    box-shadow: 8px 8px #03060c;
+    position: relative;
+}
+
+.pixel-panel::before {
+    content: "PROJECT DATABASE";
+    position: absolute;
+    top: -12px;
+    left: 18px;
+    background: var(--dark);
+    padding: 5px 10px;
+    color: var(--blue);
+    font-size: 8px;
+}
+
+.pixel-panel h3 {
+    font-size: 12px;
+    line-height: 2.5;
+    margin-bottom: 18px;
+}
+
+.pixel-panel p {
+    font-size: 8px;
+    color: #8295af;
+    line-height: 3;
+}
+
+/* ABOUT */
+
+.about {
+    margin-top: 60px;
+    padding: 30px;
+    background: var(--panel);
+    border: 3px solid #1b3859;
+    box-shadow: 7px 7px #03060c;
+}
+
+.about h2 {
+    color: var(--bright);
+    font-size: 12px;
+    line-height: 2.5;
+}
+
+.about p {
+    color: #91a4bd;
+    margin-top: 20px;
+    font-size: 8px;
+    line-height: 3;
+}
+
+/* FOOTER */
+
+footer {
+    border-top: 3px solid #142b46;
+    padding: 35px 15px;
+    text-align: center;
+    color: #647b98;
+    font-size: 8px;
+    line-height: 3;
+}
+
+footer span {
+    color: var(--blue);
+}
+
+/* BLINKING */
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+/* MOBILE */
+
+@media(max-width: 600px) {
+    nav {
+        padding: 15px;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .brand {
+        font-size: 10px;
+    }
+
+    nav a {
+        font-size: 7px;
+        margin: 0 7px;
+    }
+
+    .hero {
+        min-height: 400px;
+    }
+
+    .hero p {
+        font-size: 8px;
+    }
+
+    .container {
+        padding: 45px 18px;
+    }
+
+    .pixel-panel {
+        padding: 45px 12px;
+    }
+
+    .about {
+        padding: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="pixels" id="pixels"></div>
+
+<!-- ENTER SCREEN -->
+
+<div id="enter-screen">
+
+    <div class="small-text">WELCOME TO THE SYSTEM</div>
+
+    <h1>
+        DAT GUYS<br>
+        <span>MODS</span>
+    </h1>
+
+    <div class="pixel-line"></div>
+
+    <button class="enter-button" onclick="enterSite()">
+        CLICK TO ENTER
+    </button>
+
+    <div class="bottom-text">
+        PRESS START TO CONTINUE
+    </div>
+
+</div>
+
+<!-- WEBSITE -->
+
+<div id="website">
+
+<nav>
+    <div class="brand">DAT GUYS MODS</div>
+
+    <div>
+        <a href="#home">HOME</a>
+        <a href="#mods">MODS</a>
+        <a href="#about">ABOUT</a>
+    </div>
+</nav>
+
+<section class="hero" id="home">
+
+    <div class="status">■ SYSTEM ONLINE</div>
+
+    <h1>
+        DAT GUYS<br>
+        <span>MODS</span>
+    </h1>
+
+    <p>
+        WELCOME TO DAT GUYS MODS.
+        YOUR DESTINATION FOR VR GAMING PROJECTS,
+        MODDING AND ORIGINAL CREATIONS.
+    </p>
+
+    <a href="#mods" class="button">
+        EXPLORE PROJECTS
+    </a>
+
+</section>
+
+<main class="container" id="mods">
+
+    <h2 class="heading">/ MODS</h2>
+
+    <p class="description">
+        BROWSE OUR LATEST PROJECTS AND RELEASES.
+    </p>
+
+    <div class="pixel-panel">
+        <h3>NO RELEASES YET</h3>
+
+        <p>
+            THERE ARE CURRENTLY NO PROJECTS AVAILABLE.
+            CHECK BACK LATER!
+        </p>
+    </div>
+
+    <section class="about" id="about">
+
+        <h2>/ ABOUT DAT GUYS MODS</h2>
+
+        <p>
+            DAT GUYS MODS IS A PROJECT CREATED BY DATGUYBEN.
+            FOCUSED ON GAMING, CREATIVITY AND ORIGINAL
+            MODIFICATIONS.
+        </p>
+
+    </section>
+
+</main>
+
+<footer>
+    © 2026 <span>DAT GUYS MODS</span><br>
+    ALL RIGHTS RESERVED.
+</footer>
+
+</div>
+
+<script>
+function enterSite() {
+    document.getElementById("enter-screen").style.display = "none";
+    document.getElementById("website").style.display = "block";
+    window.scrollTo(0, 0);
+}
+
+/* CREATE PIXEL PARTICLES */
+
+const pixelContainer = document.getElementById("pixels");
+
+for (let i = 0; i < 35; i++) {
+    const pixel = document.createElement("div");
+    pixel.className = "pixel";
+    pixel.style.left = Math.random() * 100 + "%";
+    pixel.style.top = Math.random() * 100 + "%";
+    pixel.style.animationDelay = Math.random() * 5 + "s";
+    pixelContainer.appendChild(pixel);
+}
+</script>
+
+</body>
+</html>
